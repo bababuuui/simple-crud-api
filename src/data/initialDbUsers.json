@@ -1,0 +1,12 @@
+[{
+  "id": "b66423d0-782b-4cb4-bf79-581ae4c2501d",
+  "username": "Evgen",
+  "age": 30,
+  "hobbies": ["ps5","guitar","js"]
+},
+  {
+    "id": "166423d0-782b-4cb4-bf79-581ae4c0402s",
+    "username": "Max",
+    "age": 18,
+    "hobbies": ["hockey","football","java"]
+  }]
