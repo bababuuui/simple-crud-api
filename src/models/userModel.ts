@@ -3,17 +3,12 @@ import { IUser } from "./IUser";
 
 const users = initialDbUsersJSON as IUser[];
 
-function getAllUsers() {
-  return new Promise((resolve) => {
-    resolve(users);
-  });
+async function getAllUsers() {
+  return users;
 }
 
-function findUserById(id: string) {
-  return new Promise((resolve) => {
-    const user = users.find((item) => item.id === id);
-    resolve(user);
-  });
+async function findUserById(id: string) {
+  return users.find((item) => item.id === id);
 }
 
 export default { getAllUsers, findUserById };
