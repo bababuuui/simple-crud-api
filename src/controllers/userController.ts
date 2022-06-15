@@ -1,11 +1,11 @@
 import { IncomingMessage, ServerResponse } from "http";
 import * as uuid from "uuid";
-import Users from "../models/userModel";
+import * as UsersStorage from "../models/userModel";
 import { JSON_CONTENT_TYPE } from "../constants/headers";
 
-export async function getUsers(req: IncomingMessage, res: ServerResponse) {
+export async function getUsers(req: IncomingMessage, res: ServerResponse): Promise<void> {
   try {
-    const users = await Users.getAllUsers();
+    const users = await UsersStorage.getAllUsers();
     res.writeHead(200, JSON_CONTENT_TYPE);
     res.end(JSON.stringify(users));
   } catch (error) {
@@ -13,10 +13,10 @@ export async function getUsers(req: IncomingMessage, res: ServerResponse) {
   }
 }
 
-export async function getUser(req: IncomingMessage, res: ServerResponse, id: string) {
+export async function getUser(req: IncomingMessage, res: ServerResponse, id: string): Promise<void> {
   try {
     if (uuid.validate(id)) {
-      const user = await Users.findUserById(id);
+      const user = await UsersStorage.findUserById(id);
       if (user) {
         res.writeHead(200, JSON_CONTENT_TYPE);
         res.end(JSON.stringify(user));
@@ -33,7 +33,7 @@ export async function getUser(req: IncomingMessage, res: ServerResponse, id: str
   }
 }
 
-export async function createUser(req: IncomingMessage, res: ServerResponse) {
+export async function createUser(req: IncomingMessage, res: ServerResponse): Promise<void> {
   // try {
   //   const users = await Users.getAllUsers();
   //   res.writeHead(200, JSON_CONTENT_TYPE);
