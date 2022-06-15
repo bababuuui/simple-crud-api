@@ -3,7 +3,7 @@ import * as uuid from "uuid";
 import Users from "../models/userModel";
 import { JSON_CONTENT_TYPE } from "../constants/headers";
 
-async function getUsers(req: IncomingMessage, res: ServerResponse) {
+export async function getUsers(req: IncomingMessage, res: ServerResponse) {
   try {
     const users = await Users.getAllUsers();
     res.writeHead(200, JSON_CONTENT_TYPE);
@@ -13,7 +13,7 @@ async function getUsers(req: IncomingMessage, res: ServerResponse) {
   }
 }
 
-async function getUser(req: IncomingMessage, res: ServerResponse, id: string) {
+export async function getUser(req: IncomingMessage, res: ServerResponse, id: string) {
   try {
     if (uuid.validate(id)) {
       const user = await Users.findUserById(id);
@@ -33,4 +33,12 @@ async function getUser(req: IncomingMessage, res: ServerResponse, id: string) {
   }
 }
 
-export default { getUsers, getUser };
+export async function createUser(req: IncomingMessage, res: ServerResponse) {
+  // try {
+  //   const users = await Users.getAllUsers();
+  //   res.writeHead(200, JSON_CONTENT_TYPE);
+  //   res.end(JSON.stringify(users));
+  // } catch (error) {
+  //   console.log(error);
+  // }
+}
