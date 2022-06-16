@@ -1,7 +1,6 @@
-import initialDbUsersJSON from "../data/initialDbUsers.json";
 import { IUser } from "./IUser";
 
-let users = initialDbUsersJSON as IUser[];
+let users = [] as IUser[];
 
 export async function getAllUsers(): Promise<IUser[]> {
   return users;
