@@ -19,7 +19,7 @@ export function getPostData(req): Promise<string> {
 export async function getPostJSONData(req): Promise<any> {
   try {
     const data = await getPostData(req);
-    return JSON.parse(data);
+    return JSON.parse(data) as Record<string, unknown>;
   } catch (e) {
     console.log(e);
     return null;
