@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start:dev": "nodemon",
-    "start:prod": "cross-env NODE_ENV=production tsc && node ./dist/src/index.js",
+    "start:prod": "cross-env NODE_ENV=production npm run build && node ./dist/src/index.js",
     "start:multi": "cross-env LOAD_BALANCING=true npm run start:prod",
     "test": "jest"
   },
