@@ -2,9 +2,9 @@ import { IncomingMessage, ServerResponse } from "http";
 import * as UserController from "../controllers/userController";
 import { JSON_CONTENT_TYPE } from "../constants/headers";
 
-export async function route(req: IncomingMessage, res: ServerResponse, workerId: number) {
+export async function route(req: IncomingMessage, res: ServerResponse, workerId?: number) {
   try {
-    console.log(`SERVER ${workerId} ${req.method} ${req.url}`);
+    console.log(`SERVER ${workerId || 1} ${req.method} ${req.url}`);
     // GET
     if (req.url === "/api/users" && req.method === "GET") {
       await UserController.getUsers(req, res);
