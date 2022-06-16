@@ -1,19 +1,17 @@
 import { IncomingMessage, ServerResponse } from "http";
 import * as UserController from "../controllers/userController";
 import { JSON_CONTENT_TYPE } from "../constants/headers";
-import { deleteUser } from "../controllers/userController";
 
 export async function route(req: IncomingMessage, res: ServerResponse) {
   try {
+    console.log(`${req.method} ${req.url}`);
     // GET
     if (req.url === "/api/users" && req.method === "GET") {
-      console.log("api/users");
       await UserController.getUsers(req, res);
     }
 
     // GET
     else if (req.url.match(/\/api\/users\/\w+/) && req.method === "GET") {
-      console.log("api/users/{id}");
       const id = req.url.split("/")[3];
       await UserController.getUser(req, res, id);
     }
