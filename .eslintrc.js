@@ -20,6 +20,8 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": "warn",
+    "no-unused-vars": "warn",
+    "no-plusplus": "off",
     "no-console": "off",
     "import/prefer-default-export": "off",
     "import/extensions": "off",
