@@ -18,7 +18,7 @@ export async function route(req: IncomingMessage, res: ServerResponse, workerId?
       }
     }
     // with  extra path id
-    else if (req.url.match(/\/api\/users\/\w+/)) {
+    else if (req.url.match(/^\/api\/users\/[\w-]+$/)) {
       const id = req.url.split("/")[3];
       if (req.method === "GET") {
         await UserController.getUser(req, res, id);
