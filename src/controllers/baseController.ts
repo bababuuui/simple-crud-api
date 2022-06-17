@@ -14,5 +14,5 @@ export async function getNotFound(req: IncomingMessage, res: ServerResponse): Pr
 
 export async function getServerError(req: IncomingMessage, res: ServerResponse): Promise<void> {
   res.writeHead(500, JSON_CONTENT_TYPE);
-  res.end({ message: ResponseMessages.SERVER_ERROR });
+  res.end(JSON.stringify({ message: ResponseMessages.SERVER_ERROR }));
 }
