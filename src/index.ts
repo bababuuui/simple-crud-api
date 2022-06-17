@@ -10,7 +10,7 @@ if (cluster.isPrimary) {
   dotenv.config();
   const count = process.env.LOAD_BALANCING === "true" ? os.cpus().length : 1;
   console.log(`Master pid ${pid}`);
-  console.log(`Starting forks ${count}`);
+  console.log(`Starting server instances ${count}`);
   for (let i = 0; i < count; i++) cluster.fork();
 } else {
   const { id } = cluster.worker;
@@ -20,6 +20,6 @@ if (cluster.isPrimary) {
       await route(req, res, id);
     })
     .listen(port, () => {
-      console.log(`Worker: ${id}, pid: ${pid}, port: ${port}`);
+      console.log(`Server instance: ${id}, pid: ${pid}, port: ${port}`);
     });
 }
