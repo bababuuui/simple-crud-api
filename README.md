@@ -2,9 +2,12 @@
 
 # How to start the app
 
-Create .env file in the root of the project.
+1. Run `npm install`
+
+2. Create .env file in the root of the project.
 "PORT" var has to be defined. Otherwise,  it will start server with port 3000.
 
+3. Run the script 
 
 prod mode: `npm run start:prod`
 
