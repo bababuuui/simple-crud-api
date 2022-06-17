@@ -4,6 +4,7 @@ import * as UsersStorage from "../models/userModel";
 import { JSON_CONTENT_TYPE } from "../constants/headers";
 import { getPostJSONData } from "../utils/requestUtils";
 import { isUser } from "../models/IUser";
+import { ResponseMessages } from "../constants/ResponseMessages";
 
 export async function getUsers(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const users = await UsersStorage.getAllUsers();
@@ -19,11 +20,11 @@ export async function getUser(req: IncomingMessage, res: ServerResponse, id: str
       res.end(JSON.stringify(user));
     } else {
       res.writeHead(404, JSON_CONTENT_TYPE);
-      res.end("User not found");
+      res.end(ResponseMessages.USER_NOT_FOUND);
     }
   } else {
     res.writeHead(400, JSON_CONTENT_TYPE);
-    res.end("userId is invalid (not uuid)");
+    res.end(ResponseMessages.UUID_IS_NOT_VALID);
   }
 }
 
@@ -36,7 +37,7 @@ export async function createUser(req: IncomingMessage, res: ServerResponse): Pro
     res.writeHead(201, JSON_CONTENT_TYPE);
     res.end(
       JSON.stringify({
-        message: `User is successfully created.`,
+        message: ResponseMessages.OPERATION_SUCCESSFUL,
         user: { id, username, age, hobbies },
       })
     );
@@ -44,7 +45,7 @@ export async function createUser(req: IncomingMessage, res: ServerResponse): Pro
     res.writeHead(400, JSON_CONTENT_TYPE);
     res.end(
       JSON.stringify({
-        error: `User doesn't have required fields`,
+        error: ResponseMessages.NOT_ENOUGH_REQUIRED_FIELDS,
       })
     );
   }
@@ -59,13 +60,13 @@ export async function updateUser(req: IncomingMessage, res: ServerResponse, user
       res.writeHead(200, JSON_CONTENT_TYPE);
       res.end(
         JSON.stringify({
-          message: `User is successfully updated.`,
+          message: ResponseMessages.OPERATION_SUCCESSFUL,
           user: { userId, username, age, hobbies },
         })
       );
     } else {
       res.writeHead(404, JSON_CONTENT_TYPE);
-      res.end("User not found");
+      res.end(ResponseMessages.USER_NOT_FOUND);
     }
   } else {
     res.writeHead(400, JSON_CONTENT_TYPE);
@@ -80,13 +81,13 @@ export async function updateUser(req: IncomingMessage, res: ServerResponse, user
 export async function deleteUser(req: IncomingMessage, res: ServerResponse, id: string): Promise<void> {
   if (!validate(id)) {
     res.writeHead(400, JSON_CONTENT_TYPE);
-    res.end("userId is invalid (not uuid)");
+    res.end(ResponseMessages.UUID_IS_NOT_VALID);
   } else if (await UsersStorage.findUserById(id)) {
     await UsersStorage.deleteUserById(id);
     res.writeHead(204, JSON_CONTENT_TYPE);
     res.end();
   } else {
     res.writeHead(404, JSON_CONTENT_TYPE);
-    res.end("User not found");
+    res.end(ResponseMessages.USER_NOT_FOUND);
   }
 }
