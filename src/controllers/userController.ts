@@ -81,9 +81,7 @@ export async function deleteUser(req: IncomingMessage, res: ServerResponse, id: 
   if (!validate(id)) {
     res.writeHead(400, JSON_CONTENT_TYPE);
     res.end("userId is invalid (not uuid)");
-  }
-  const user = await UsersStorage.findUserById(id);
-  if (user) {
+  } else if (await UsersStorage.findUserById(id)) {
     await UsersStorage.deleteUserById(id);
     res.writeHead(204, JSON_CONTENT_TYPE);
     res.end();
