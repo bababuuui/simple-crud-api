@@ -1,0 +1,46 @@
+{
+  "name": "simple-crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start:dev": "nodemon",
+    "start:prod": "cross-env NODE_ENV=production npm run build && node ./dist/src/index.js",
+    "start:multi": "cross-env LOAD_BALANCING=true npm run start:prod",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-bababuuui:bababuuui/simple-crud-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^16.11.39",
+    "axios": "^0.27.2",
+    "cluster": "^0.7.7",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.1",
+    "prettier": "^2.7.0",
+    "ts-jest": "^28.0.5"
+  }
+}
