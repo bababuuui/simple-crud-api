@@ -6,4 +6,5 @@ export enum ResponseMessages {
   NOT_ENOUGH_REQUIRED_FIELDS = `User doesn't have required fields`,
   OPERATION_SUCCESSFUL = "Operation is successful",
   UUID_IS_NOT_VALID = "Id is invalid (not uuid)",
+  JSON_PARSE_ERROR = `Json parse error`,
 }

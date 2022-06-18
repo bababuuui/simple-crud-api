@@ -16,3 +16,8 @@ export async function getServerError(req: IncomingMessage, res: ServerResponse):
   res.writeHead(500, JSON_CONTENT_TYPE);
   res.end(JSON.stringify({ message: ResponseMessages.SERVER_ERROR }));
 }
+
+export async function getJsonParseError(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  res.writeHead(400, JSON_CONTENT_TYPE);
+  res.end(JSON.stringify({ message: ResponseMessages.JSON_PARSE_ERROR }));
+}

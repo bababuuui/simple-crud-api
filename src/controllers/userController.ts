@@ -5,6 +5,7 @@ import { JSON_CONTENT_TYPE } from "../constants/headers";
 import { getPostJSONData } from "../utils/requestUtils";
 import { isUser } from "../models/IUser";
 import { ResponseMessages } from "../constants/ResponseMessages";
+import * as BaseController from "./baseController";
 
 export async function getUsers(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const users = await UsersStorage.getAllUsers();
@@ -30,7 +31,9 @@ export async function getUser(req: IncomingMessage, res: ServerResponse, id: str
 
 export async function createUser(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const body = await getPostJSONData(req);
-  if (isUser(body)) {
+  if (!body) {
+    await BaseController.getJsonParseError(req, res);
+  } else if (isUser(body)) {
     const { username, age, hobbies } = body;
     const id = uuid();
     await UsersStorage.addUser({ id, username, age, hobbies });
@@ -45,7 +48,7 @@ export async function createUser(req: IncomingMessage, res: ServerResponse): Pro
     res.writeHead(400, JSON_CONTENT_TYPE);
     res.end(
       JSON.stringify({
-        error: ResponseMessages.NOT_ENOUGH_REQUIRED_FIELDS,
+        message: ResponseMessages.NOT_ENOUGH_REQUIRED_FIELDS,
       })
     );
   }
@@ -53,7 +56,9 @@ export async function createUser(req: IncomingMessage, res: ServerResponse): Pro
 
 export async function updateUser(req: IncomingMessage, res: ServerResponse, userId: string): Promise<void> {
   const body = await getPostJSONData(req);
-  if (isUser(body) && validate(userId)) {
+  if (!body) {
+    await BaseController.getJsonParseError(req, res);
+  } else if (isUser(body) && validate(userId)) {
     if (await UsersStorage.findUserById(userId)) {
       const { username, age, hobbies } = body;
       await UsersStorage.updateUser({ id: userId, username, age, hobbies });
